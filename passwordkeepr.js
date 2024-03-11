@@ -77,7 +77,19 @@ switch (command) {
       });
     break;
 
+  case 'education':
+    pool
+      .query('SELECT * FROM accounts JOIN sites ON sites.id = site_id JOIN category ON category.id = category_id WHERE category.id = 5;')
+      .then((result) => {
+        const allAccounts = result.rows;
+        console.log(allAccounts);
+        pool.end();
+      });
+    break;
 
+  case 'create':
+    pool
+      .query('INSERT INTO accounts (email, password, category_id, user_id, site_id) VALUES($1, $2, $3, $4, $5)', [email, password, category_id, user_id, site_id]);
 
 
 
