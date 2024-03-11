@@ -1,28 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers } = require('../db/queries/passwordkeeprdatabase.js');
+const { getAllAccounts, getAccountsByCategory } = require('../db/queries/passwordkeeprdatabase.js');
 
 router.get('/', (req, res) => {
-  getAllUsers()
-    .then((users) => {
+  getAllAccounts()
+    .then((accounts) => {
       const templateVars = {
-        users
+        accounts
       };
       res.status(200).render('/index', templateVars);
-    });
+    })
+    .catch((error) => {
+        // Handle the error
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+      });
+});
+
+router.get('/:id', (req, res) => {
+    const id = req.params.id;
+
+    getAccountsByCategory(id)
+        .then((accounts) => {
+            const templateVars = {
+                accounts
+            };
+            res.status(200).render('/categories', templateVars);
+        });
 });
 
 
-/*
-if (!users) {
-    return res.send({ message: "User is not logged in" });
-  }
 
-  try {
-"getsitesByUser" function from the "passwordkeepr" module
-    const account = await loginUserdb.getaccountByUser(user.id)
 
-    if (!organization) {
-      return res.send({ error: "No account for the logged in user found" });
-    }
-*/
+
+
+// route to index.ejs 
+// route to catergories.ejs
