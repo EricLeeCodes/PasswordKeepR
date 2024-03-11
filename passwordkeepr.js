@@ -29,13 +29,57 @@ const command = args[0]; //Work with terminal for SQL commands
 switch (command) {
   case 'index':
     pool
-      .query('SELECT * FROM accounts;')
+      .query('SELECT * FROM accounts JOIN sites ON sites.id = site_id JOIN category ON category.id = category_id;')
       .then((result) => {
         const allAccounts = result.rows;
         console.log(allAccounts);
         pool.end();
       });
     break;
+
+  case 'finance':
+    pool
+      .query('SELECT * FROM accounts JOIN sites ON sites.id = site_id JOIN category ON category.id = category_id WHERE category.id = 1;')
+      .then((result) => {
+        const allAccounts = result.rows;
+        console.log(allAccounts);
+        pool.end();
+      });
+    break;
+
+  case 'social':
+    pool
+      .query('SELECT * FROM accounts JOIN sites ON sites.id = site_id JOIN category ON category.id = category_id WHERE category.id = 2;')
+      .then((result) => {
+        const allAccounts = result.rows;
+        console.log(allAccounts);
+        pool.end();
+      });
+    break;
+
+  case 'work':
+    pool
+      .query('SELECT * FROM accounts JOIN sites ON sites.id = site_id JOIN category ON category.id = category_id WHERE category.id = 3;')
+      .then((result) => {
+        const allAccounts = result.rows;
+        console.log(allAccounts);
+        pool.end();
+      });
+    break;
+
+  case 'entertainment':
+    pool
+      .query('SELECT * FROM accounts JOIN sites ON sites.id = site_id JOIN category ON category.id = category_id WHERE category.id = 4;')
+      .then((result) => {
+        const allAccounts = result.rows;
+        console.log(allAccounts);
+        pool.end();
+      });
+    break;
+
+
+
+
 
   default: console.log("Hello Testing");
 }
