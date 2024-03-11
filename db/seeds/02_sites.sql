@@ -1,11 +1,21 @@
 INSERT INTO sites (name, url) VALUES 
+--Social
 ('Facebook', 'https://www.facebook.com/'),
 ('Twitter', 'https://twitter.com/'),
 ('Instagram', 'https://www.instagram.com/'),
-('LinkedIn', 'https://www.linkedin.com/'),
 ('Reddit', 'https://www.reddit.com/'),
+--Entertainment
+('Netflix', 'https://www.netflix.com/'),
+('Disney+', 'https://www.disneyplus.com/'),
 ('YouTube', 'https://www.youtube.com/'),
-('Amazon', 'https://www.amazon.com/'),
-('Google', 'https://www.google.com/'),
+--Work
+('GitHub', 'https://github.com/'),
+('LinkedIn', 'https://www.linkedin.com/'),
+--Education
 ('Wikipedia', 'https://www.wikipedia.org/'),
-('GitHub', 'https://github.com/');
+('Google', 'https://www.google.com/'),
+('Lighthouse Labs', 'https://web.compass.lighthouselabs.ca/'),
+--Finance
+('CIBC', 'https://www.cibc.com/'),
+('TD Bank', 'https://www.td.com/'),
+('Yahoo Finance', 'https://www.yahoofinance.com/');
