@@ -89,9 +89,7 @@ switch (command) {
 
   case 'create':
     pool
-      .query('INSERT INTO accounts (email, password, category_id, user_id, site_id) VALUES($1, $2, $3, $4, $5)', [email, password, category_id, user_id, site_id]);
-
-
+      .query('INSERT INTO accounts (email, password, category_id, user_id, site_id) VALUES($1, $2, $3, $4, $5, $6)', [email, password, site_name, site_url, category_id, user_id]);
 
   default: console.log("Hello Testing");
 }
