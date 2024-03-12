@@ -1,20 +1,18 @@
 const db = require('../connection');
 
 const getAllAccounts = () => {
-  return db.query('SELECT * FROM accounts JOIN sites ON sites.id = site_id JOIN category ON category.id = category_id;')
+  return db.query('SELECT * FROM accounts JOIN category ON category.id = category_id;')
     .then((result) => {
-        const allAccounts = result.rows;
-        console.log(allAccounts);
-        pool.end();
-      });
+      return result.rows;
+    });
 };
 
 
 const getAccountsByCategory = (id) => {
-  return client.query('SELECT * FROM accounts JOIN sites ON sites.id = site_id JOIN category ON category.id = category_id WHERE category.id = $1;', [id])
-  .then((result) => {
-    return result.rows[0]; 
-  });
+  return client.query('SELECT * FROM accounts JOIN category ON category.id = category_id WHERE category.id = $1;', [id])
+    .then((result) => {
+      return result.rows[0];
+    });
 };
 
 const addAccount = (account) => {
@@ -26,9 +24,9 @@ const addAccount = (account) => {
     .catch((err) => {
       console.log(err.message);
     });
-  };
+};
 
-  
+
 const editAccount = () => {
   return pool
     .query('UPDATE accounts SET email = $1, password = $2, site_name = $3, site_url = $4, category_id = $5, user_id = $6', [account.email, account.password, account.site_name, account.site_url, account.category_id, account.user_id])
@@ -38,10 +36,10 @@ const editAccount = () => {
     .catch((err) => {
       console.log(err.message);
     });
-    
-}
 
-  
+};
+
+
 const deleteAccount = () => {
   return pool
     .query('DELETE FROM accounts WHERE account.id = $1', [id])
@@ -51,6 +49,6 @@ const deleteAccount = () => {
     .catch((err) => {
       console.log(err.message);
     });
-  };
+};
 
-module.exports = { getAllAccounts, getAccountsByCategory, addAccount, editAccount, deleteAccount};
+module.exports = { getAllAccounts, getAccountsByCategory, addAccount, editAccount, deleteAccount };
