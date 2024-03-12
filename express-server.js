@@ -15,14 +15,14 @@ app.set('view engine', 'ejs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 
+//Route
+
+const passwordkeeprRouter = require('./routes/passwordkeeprRoutes.js');
+app.use('/views', passwordkeeprRouter);
+
+
 // Listener
 
 app.listen(PORT, () => console.log(
   `Express server is listening: http://localhost:${PORT}`
 ));
-
-
-//Route
-
-const passwordkeeprRouter = require('./routes/passwordkeeprRoutes.js');
-app.use('/views', passwordkeeprRouter);

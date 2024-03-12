@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
+  <title>Home Page (Show: <%= accounts.email %>)</title>
 </head>
 <body>
   <div>Hello, World! This is the home page</div>
+  <h1>
+            <%= accounts.site_name %>
+            <em>(<%= accounts.site_name %>)</em>
+        </h1>
 </body>
 </html>

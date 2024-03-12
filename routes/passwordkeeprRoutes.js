@@ -2,16 +2,17 @@ const express = require('express');
 const router = express.Router();
 const cookieSession = require('cookie-session');
 
+//, getAccountsByCategory, addAccount, editAccount, deleteAccounty
+const { getAllAccounts } = require('../db/queries/passwordkeeprdatabase.js');
 
-const { getAllAccounts, getAccountsByCategory, addAccount, editAccount, deleteAccounty } = require('../db/queries/passwordkeeprdatabase.js');
 
+// router.get('/login', (req,res) => {
 
-router.get('/login', (req,res) => {
-
-})
+// })
 
 //The home page
-router.get('/', (req, res) => {
+router.get('/index', (req, res) => {
+    console.log('##millionth attempt')
   //Check if user is logged in
   // const isUserLoggedIn = req.session.user_id;
   getAllAccounts()
@@ -24,7 +25,7 @@ router.get('/', (req, res) => {
       //   return res.redirect('/login');
       // } 
 
-      res.status(200).render('/index', templateVars);
+      res.status(200).render('index', templateVars);
     })
     .catch((error) => {
         // Handle the error
@@ -36,17 +37,17 @@ router.get('/', (req, res) => {
 
 
 
-router.get('/:id', (req, res) => {
-    const id = req.params.id;
+// router.get('/:id', (req, res) => {
+//     const id = req.params.id;
 
-    getAccountsByCategory(id)
-        .then((accounts) => {
-            const templateVars = {
-                accounts
-            };
-            res.status(200).render('/categories', templateVars);
-        });
-});
+//     getAccountsByCategory(id)
+//         .then((accounts) => {
+//             const templateVars = {
+//                 accounts
+//             };
+//             res.status(200).render('/categories', templateVars);
+//         });
+// });
 
 
 module.exports = router;
