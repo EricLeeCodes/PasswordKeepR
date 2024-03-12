@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page (Show: <%= accounts.email %>)</title>
-</head>
-<body>
-  <div>Hello, World! This is the home page</div>
-  <h1>
-            <%= accounts.site_name %>
-            <em>(<%= accounts.site_name %>)</em>
-        </h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Accounts</title>
+  </head>
+  <body>
+    <h1>All Accounts</h1>
+    <div>
+      <ul>
+        <% for(const account of accounts) { %>
+
+        <li><%= account.site_name %></li>
+
+        <% } %>
+      </ul>
+    </div>
+  </body>
 </html>
