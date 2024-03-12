@@ -3,8 +3,11 @@ const router = express.Router();
 const cookieSession = require('cookie-session');
 
 //, getAccountsByCategory, addAccount, editAccount, deleteAccounty
-const { getAllAccounts } = require('../db/queries/passwordkeeprdatabase.js');
+const { getAllAccounts, addAccount } = require('../db/queries/passwordkeeprdatabase.js');
 
+/////////////////////////////////////////////////////////
+////////////////////////GET//////////////////////////////
+/////////////////////////////////////////////////////////
 
 router.get('/login', (req, res) => {
 
@@ -34,8 +37,6 @@ router.get('/', (req, res) => {
 });
 
 
-
-
 router.get('/:id', (req, res) => {
   const id = req.params.id;
 
@@ -44,9 +45,35 @@ router.get('/:id', (req, res) => {
       const templateVars = {
         accounts
       };
-      res.status(200).render('/categories', templateVars);
+      res.status(200).render('category', templateVars);
     });
 });
+
+
+/////////////////////////////////////////////////////////
+////////////////////////POST/////////////////////////////
+/////////////////////////////////////////////////////////
+
+// Create a new account
+router.post("/create", (req, res) => {
+  let accountEmail = req.body.email;
+  let accountPassword = req.body.password;
+  let accountSiteName = req.body.site_name;
+  let accountSiteUrl = req.body.site_url;
+  let accountCategory = req.body.category;
+  let accountUserId = 1;
+
+  const account = (accountEmail, accountPassword, accountSiteName, accountSiteUrl, accountCategory, accountUserId);
+
+  addAccount(account)
+    .then(() => {
+      res.send('Success! Return to home <a href="/">here</a>');
+
+    })
+    .catch((e) => res.send(e));
+});
+
+
 
 
 module.exports = router;
