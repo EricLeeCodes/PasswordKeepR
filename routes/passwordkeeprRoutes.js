@@ -6,48 +6,47 @@ const cookieSession = require('cookie-session');
 const { getAllAccounts } = require('../db/queries/passwordkeeprdatabase.js');
 
 
-// router.get('/login', (req,res) => {
+router.get('/login', (req, res) => {
 
-// })
+});
 
 //The home page
-router.get('/index', (req, res) => {
-    console.log('##millionth attempt')
+router.get('/', (req, res) => {
   //Check if user is logged in
-  // const isUserLoggedIn = req.session.user_id;
+  const isUserLoggedIn = req.session.user_id;
   getAllAccounts()
     .then((accounts) => {
       const templateVars = {
         accounts
       };
       // Redirect if not logged in
-      // if (!isUserLoggedIn) {
-      //   return res.redirect('/login');
-      // } 
+      if (!isUserLoggedIn) {
+        return res.redirect('/login');
+      }
 
       res.status(200).render('index', templateVars);
     })
     .catch((error) => {
-        // Handle the error
-        console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
-      });
+      // Handle the error
+      console.error('Error:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });
 
 
 
 
-// router.get('/:id', (req, res) => {
-//     const id = req.params.id;
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
 
-//     getAccountsByCategory(id)
-//         .then((accounts) => {
-//             const templateVars = {
-//                 accounts
-//             };
-//             res.status(200).render('/categories', templateVars);
-//         });
-// });
+  getAccountsByCategory(id)
+    .then((accounts) => {
+      const templateVars = {
+        accounts
+      };
+      res.status(200).render('/categories', templateVars);
+    });
+});
 
 
 module.exports = router;
