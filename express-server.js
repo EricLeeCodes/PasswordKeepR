@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const app = express();
 const PORT = 8000;
 
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 // Middleware
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 //Route
 
 const passwordkeeprRouter = require('./routes/passwordkeeprRoutes.js');
-app.use('/views', passwordkeeprRouter);
+app.use('/', passwordkeeprRouter);
 
 
 // Listener
