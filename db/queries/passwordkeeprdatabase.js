@@ -53,4 +53,4 @@ const deleteAccount = () => {
     });
   };
 
-module.exports = { getAllAccounts, getAccountsByCategory, getAccount, editAccount, deleteAccount};
+module.exports = { getAllAccounts, getAccountsByCategory, addAccount, editAccount, deleteAccount};

@@ -6,7 +6,7 @@ const morgan = require('morgan');
 // Configuration
 
 const app = express();
-const PORT = 8181;
+const PORT = 8000;
 
 app.set('view engine', 'ejs');
 
@@ -21,3 +21,8 @@ app.listen(PORT, () => console.log(
   `Express server is listening: http://localhost:${PORT}`
 ));
 
+
+//Route
+
+const passwordkeeprRouter = require('./routes/passwordkeeprRoutes.js');
+app.use('/views', passwordkeeprRouter);
