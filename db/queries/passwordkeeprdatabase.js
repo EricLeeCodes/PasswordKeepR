@@ -29,7 +29,7 @@ const addAccount = (account) => {
 
 const editAccount = () => {
   return pool
-    .query('UPDATE accounts SET email = $1, password = $2, site_name = $3, site_url = $4, category_id = $5, user_id = $6', [account.email, account.password, account.site_name, account.site_url, account.category_id, account.user_id])
+    .query('UPDATE accounts SET email = $1, password = $2, user_id = $3', [account.email, account.password, account.user_id])
     .then((result) => {
       return result.rows[0];
     })
@@ -40,7 +40,7 @@ const editAccount = () => {
 };
 
 
-const deleteAccount = () => {
+const deleteAccount = (id) => {
   return pool
     .query('DELETE FROM accounts WHERE account.id = $1', [id])
     .then((result) => {
