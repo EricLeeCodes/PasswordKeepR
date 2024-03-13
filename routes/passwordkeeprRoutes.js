@@ -1,16 +1,17 @@
 const express = require('express');
-const router = express.Router();
 const cookieSession = require('cookie-session');
+const router = express.Router();
 
-app.use(cookieSession({
+router.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2'],
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
-//, getAccountsByCategory, addAccount, editAccount, deleteAccounty
-const { getAllAccounts, addAccount, getAccountsByCategory, addAccount, editAccount, deleteAccount, loginAccount } = require('../db/queries/passwordkeeprdatabase.js');
+
+
+const { getAllAccounts, addAccount, getAccountsByCategory, editAccount, deleteAccount, loginAccount } = require('../db/queries/passwordkeeprdatabase.js');
 
 /////////////////////////////////////////////////////////
 ////////////////////////GET//////////////////////////////
@@ -19,26 +20,26 @@ const { getAllAccounts, addAccount, getAccountsByCategory, addAccount, editAccou
 
 //Login page
 router.get('/login', (req, res) => {
-  const userId = req.session.user_id;
-  //If user is not logged in, goes to login page
-  if (!userId) {
-    res.render("login");
-  } else {
-    res.redirect("index"); //If user is logged in, redirects to /urls
-  }
+  return res.render("login");
 });
 
 //The home page
 router.get('/', (req, res) => {
   //Check if user is logged in
-  const userId = req.session.user_id;
-  // const isUserLoggedIn = req.session.user_id;
+  if (req.session.user_id) {
+    return res.redirect("/index");
+  }  //If user is not logged in, goes to login page
+  if (!req.session.user_id) {
+    return res.redirect("/login");
+  }
+
   getAllAccounts()
     .then((accounts) => {
       const templateVars = {
+
         accounts
       };
-      // Redirect if not logged in
+      //Redirect if not logged in
       if (!userId) {
         return res.redirect('/login');
       }
@@ -67,6 +68,11 @@ router.get('/:id', (req, res) => {
         accounts
       };
       res.status(200).render('category', templateVars);
+    })
+    .catch((error) => {
+      // Handle the error
+      console.error('Error:', error);
+      res.status(500).send('Internal Server Error');
     });
 });
 
