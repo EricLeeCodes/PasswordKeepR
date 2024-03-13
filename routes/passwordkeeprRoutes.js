@@ -2,28 +2,44 @@ const express = require('express');
 const router = express.Router();
 const cookieSession = require('cookie-session');
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2'],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
+
 //, getAccountsByCategory, addAccount, editAccount, deleteAccounty
-const { getAllAccounts, addAccount } = require('../db/queries/passwordkeeprdatabase.js');
+const { getAllAccounts, addAccount, getAccountsByCategory, addAccount, editAccount, deleteAccount } = require('../db/queries/passwordkeeprdatabase.js');
 
 /////////////////////////////////////////////////////////
 ////////////////////////GET//////////////////////////////
 /////////////////////////////////////////////////////////
 
-router.get('/login', (req, res) => {
 
+//Login page
+router.get('/login', (req, res) => {
+  const userId = req.session.user_id;
+  //If user is not logged in, goes to login page
+  if (!userId) {
+    res.render("login");
+  } else {
+    res.redirect("index"); //If user is logged in, redirects to /urls
+  }
 });
 
 //The home page
 router.get('/', (req, res) => {
   //Check if user is logged in
-  const isUserLoggedIn = req.session.user_id;
+  const userId = req.session.user_id;
+  // const isUserLoggedIn = req.session.user_id;
   getAllAccounts()
     .then((accounts) => {
       const templateVars = {
         accounts
       };
       // Redirect if not logged in
-      if (!isUserLoggedIn) {
+      if (!userId) {
         return res.redirect('/login');
       }
 
@@ -38,6 +54,11 @@ router.get('/', (req, res) => {
 
 
 router.get('/:id', (req, res) => {
+  const userId = req.session.user_id;
+  if (!userId) {
+    return res.redirect('/login');
+  }
+
   const id = req.params.id;
 
   getAccountsByCategory(id)
@@ -49,6 +70,19 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// Edit account 
+router.get('/:id/edit', (req, res) => {
+  const postId = req.params.id;
+
+  editAccount(postId)
+    .then((post) => {
+      res.render('edit', { post });
+    })
+    .catch((error) => {
+      console.error('Error fetching post:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
 
 /////////////////////////////////////////////////////////
 ////////////////////////POST/////////////////////////////
@@ -68,6 +102,36 @@ router.post("/create", (req, res) => {
   addAccount(account)
     .then(() => {
       res.send('Success! Return to home <a href="/">here</a>');
+    })
+    .catch((e) => res.send(e));
+});
+
+
+// Delete account 
+router.delete("/:id/delete", (req, res) => {
+  const accountId = req.params.id;
+
+  deleteAccount(accountId)
+    .then(() => {
+      res.send('Account deleted successfully');
+    })
+    .catch((error) => {
+      res.status(500).send('Error deleting account: ' + error.message);
+    });
+});
+
+//Update account 
+
+router.post("/edit", (req, res) => {
+  let accountEmail = req.body.email;
+  let accountPassword = req.body.password;
+  let accountUserId = 1;
+
+  const account = (accountEmail, accountPassword, accountUserId);
+
+  addAccount(account)
+    .then(() => {
+      res.send('Success! Return to home <a href="/">here</a>');
 
     })
     .catch((e) => res.send(e));
@@ -76,9 +140,10 @@ router.post("/create", (req, res) => {
 
 
 
+
+
+
 module.exports = router;
 
 
 
-// route to index.ejs 
-// route to catergories.ejs
