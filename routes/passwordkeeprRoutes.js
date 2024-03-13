@@ -27,30 +27,26 @@ router.get('/login', (req, res) => {
 router.get('/', (req, res) => {
   //Check if user is logged in
   if (req.session.user_id) {
-    return res.redirect("/index");
+    getAllAccounts()
+      .then((accounts) => {
+        const templateVars = {
+          accounts
+        };
+        //Redirect if not logged in
+
+        res.status(200).render('index', templateVars);
+      })
+      .catch((error) => {
+        // Handle the error
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+      });
   }  //If user is not logged in, goes to login page
   if (!req.session.user_id) {
     return res.redirect("/login");
   }
 
-  getAllAccounts()
-    .then((accounts) => {
-      const templateVars = {
 
-        accounts
-      };
-      //Redirect if not logged in
-      if (!userId) {
-        return res.redirect('/login');
-      }
-
-      res.status(200).render('index', templateVars);
-    })
-    .catch((error) => {
-      // Handle the error
-      console.error('Error:', error);
-      res.status(500).send('Internal Server Error');
-    });
 });
 
 //Category page
