@@ -51,4 +51,15 @@ const deleteAccount = (id) => {
     });
 };
 
-module.exports = { getAllAccounts, getAccountsByCategory, addAccount, editAccount, deleteAccount };
+const loginAccount = (email, user_password) => {
+  return pool
+    .query('SELECT * FROM users WHERE email = $1 AND user_password = $2', [email, user_password])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
+
+module.exports = { getAllAccounts, getAccountsByCategory, addAccount, editAccount, deleteAccount, loginAccount };

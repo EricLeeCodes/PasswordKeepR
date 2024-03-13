@@ -10,7 +10,7 @@ app.use(cookieSession({
 }));
 
 //, getAccountsByCategory, addAccount, editAccount, deleteAccounty
-const { getAllAccounts, addAccount, getAccountsByCategory, addAccount, editAccount, deleteAccount } = require('../db/queries/passwordkeeprdatabase.js');
+const { getAllAccounts, addAccount, getAccountsByCategory, addAccount, editAccount, deleteAccount, loginAccount } = require('../db/queries/passwordkeeprdatabase.js');
 
 /////////////////////////////////////////////////////////
 ////////////////////////GET//////////////////////////////
@@ -52,7 +52,7 @@ router.get('/', (req, res) => {
     });
 });
 
-
+//Category page
 router.get('/:id', (req, res) => {
   const userId = req.session.user_id;
   if (!userId) {
@@ -72,6 +72,12 @@ router.get('/:id', (req, res) => {
 
 // Edit account 
 router.get('/:id/edit', (req, res) => {
+
+  const userId = req.session.user_id;
+  if (!userId) {
+    return res.redirect('/login');
+  }
+
   const postId = req.params.id;
 
   editAccount(postId)
@@ -95,7 +101,7 @@ router.post("/create", (req, res) => {
   let accountSiteName = req.body.site_name;
   let accountSiteUrl = req.body.site_url;
   let accountCategory = req.body.category;
-  let accountUserId = 1;
+  let accountUserId = req.session.user_id;
 
   const account = (accountEmail, accountPassword, accountSiteName, accountSiteUrl, accountCategory, accountUserId);
 
@@ -106,6 +112,39 @@ router.post("/create", (req, res) => {
     .catch((e) => res.send(e));
 });
 
+//Login account button
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  const loggedIn = loginAccount(email, password)
+    .then((user) => {
+      if (!loggedIn) {
+        return res.status(400).send("Username and password are required.");
+      }
+
+      req.session.user_id = user.id;
+      res.redirect("/");
+    })
+    .catch((e) => res.send(e));
+});
+
+
+//Update account 
+
+router.post("/edit", (req, res) => {
+  let accountEmail = req.body.email;
+  let accountPassword = req.body.password;
+  let accountUserId = req.session.user_id;
+
+  const account = (accountEmail, accountPassword, accountUserId);
+
+  addAccount(account)
+    .then(() => {
+      res.send('Success! Return to home <a href="/">here</a>');
+
+    })
+    .catch((e) => res.send(e));
+});
 
 // Delete account 
 router.delete("/:id/delete", (req, res) => {
@@ -119,28 +158,6 @@ router.delete("/:id/delete", (req, res) => {
       res.status(500).send('Error deleting account: ' + error.message);
     });
 });
-
-//Update account 
-
-router.post("/edit", (req, res) => {
-  let accountEmail = req.body.email;
-  let accountPassword = req.body.password;
-  let accountUserId = 1;
-
-  const account = (accountEmail, accountPassword, accountUserId);
-
-  addAccount(account)
-    .then(() => {
-      res.send('Success! Return to home <a href="/">here</a>');
-
-    })
-    .catch((e) => res.send(e));
-});
-
-
-
-
-
 
 
 module.exports = router;
