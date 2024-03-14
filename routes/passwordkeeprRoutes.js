@@ -89,9 +89,9 @@ router.get('/:id/edit', (req, res) => {
         account
       };
       res.status(200).render('edit', templateVars);
-    })
+    });
 
-  
+
 
 });
 
@@ -151,10 +151,10 @@ router.post("/:id/edit", (req, res) => {
   editAccount(accountEmail, accountPassword, postId)
     .then((results) => {
       console.log(results);
-      res.send('Edited successfully! Return home <a href="/">here</a>')
+      res.send('Edited successfully! Return home <a href="/">here</a>');
     })
     .catch((error) => {
-      console.error('Error fetching post:', error);s
+      console.error('Error fetching post:', error); s;
       res.status(500).send('Internal Server Error');
     });
 });
