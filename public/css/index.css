@@ -1,4 +1,19 @@
-.table-sizing {
-  color: red;
-  transform: translate(-50%, -50%);
+table {
+  table-layout: fixed;
+  width: auto;
+  font-size: 10px;
+}
+
+td {
+  word-wrap: break-word;
+}
+
+th {
+  position: sticky;
+  top: 0px;
+}
+
+.scrolling {
+  height: 400px;
+  overflow: scroll;
 }

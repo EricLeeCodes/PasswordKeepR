@@ -11,45 +11,44 @@
       crossorigin="anonymous"
     />
 
-   <!-- App CSS  -->
-  <link rel="stylesheet" href="views/css/index.css" type="text/css" />
-
+    <!-- App CSS  -->
+    <link rel="stylesheet" href="css/index.css" type="text/css" />
   </head>
+
   <body>
     <h1 class="d-flex justify-content-center">All Accounts</h1>
-    <div class="card text-center w-75 table-sizing">
-      <div class="">
-        <table
-          class="table table-dark table-striped table-hover table-bordered"
-        >
-          <thead class="card-header">
-            <tr>
-              <th scope="col">Site</th>
-              <th scope="col">URL</th>
-              <th scope="col">Email</th>
-              <th scope="col">Password</th>
-              <th scope="col">Category</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
+    <div class="container scrolling">
+      <table
+        class="table table-dark table-striped table-hover table-bordered text-center table-sizing table-responsive"
+      >
+        <thead class="">
+          <tr>
+            <th scope="col" class="col-2">Site</th>
+            <th scope="col" class="col-3">URL</th>
+            <th scope="col" class="col-2">Email</th>
+            <th scope="col" class="col-2">Password</th>
+            <th scope="col">Category</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody class="vh-100">
           <% for(const account of accounts) { %>
-          <tbody class="card-body">
-            <tr>
-              <td><%= account.site_name %></td>
-              <td><%= account.site_url %></td>
-              <td><%= account.email %></td>
-              <td><%= account.password %></td>
-              <td><%= account.category_id %></td>
 
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
+          <tr>
+            <td><%= account.site_name %></td>
+            <td><%= account.site_url %></td>
+            <td><%= account.email %></td>
+            <td><%= account.password %></td>
+            <td><%= account.category_id %></td>
+
+            <td></td>
+            <td></td>
+          </tr>
 
           <% } %>
-        </table>
-      </div>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
