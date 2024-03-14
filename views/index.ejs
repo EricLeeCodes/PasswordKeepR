@@ -17,9 +17,9 @@
 
   <body>
     <h1 class="d-flex justify-content-center">All Accounts</h1>
-    <div class="container scrolling">
+    <div class="container scrolling table-responsive">
       <table
-        class="table table-dark table-striped table-hover table-bordered text-center table-sizing table-responsive"
+        class="table table-dark table-striped table-hover table-bordered text-center table-sizing table align-middle"
       >
         <thead class="">
           <tr>
@@ -40,8 +40,18 @@
             <td><%= account.site_url %></td>
             <td><%= account.email %></td>
             <td><%= account.password %></td>
-            <td><%= account.category_id %></td>
 
+            <% if (account.category_id === 1) { %>
+            <td>Finance</td>
+            <% } else if (account.category_id === 2) { %>
+            <td>Social</td>
+            <% } else if (account.category_id === 3) { %>
+            <td>Work</td>
+            <% } else if (account.category_id === 4) { %>
+            <td>Entertainment</td>
+            <% } else if (account.category_id === 5) { %>
+            <td>Education</td>
+            <% } %>
             <td></td>
             <td>
               <form method="POST" action="/<%= account.id %>/delete">
