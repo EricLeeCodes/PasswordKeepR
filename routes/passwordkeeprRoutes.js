@@ -150,8 +150,7 @@ router.post("/:id/edit", (req, res) => {
 
   editAccount(accountEmail, accountPassword, postId)
     .then((results) => {
-      console.log(results);
-      res.send('Edited successfully! Return home <a href="/">here</a>')
+      res.redirect("/");
     })
     .catch((error) => {
       console.error('Error fetching post:', error);s
@@ -164,7 +163,7 @@ router.post("/:id/delete", (req, res) => {
   const accountId = req.params.id;
   deleteAccount(accountId)
     .then(() => {
-      res.send('Account deleted successfully');
+      res.redirect("/");
     })
     .catch((error) => {
       res.status(500).send('Error deleting account: ' + error.message);
