@@ -2,7 +2,7 @@ const db = require('../connection');
 
 const getAllAccounts = () => {
   return db
-    .query('SELECT * FROM accounts JOIN category ON category.id = category_id;')
+    .query('SELECT accounts.id, email, password, site_name, site_url, category_id, user_id, category_name FROM accounts JOIN category ON category.id = category_id;')
     .then((result) => {
       return result.rows;
     })
@@ -14,7 +14,7 @@ const getAllAccounts = () => {
 
 const getAccountsByCategory = (id) => {
   return db
-    .query('SELECT * FROM accounts JOIN category ON category.id = category_id WHERE category.id = $1;', [id])
+    .query('SELECT accounts.id, email, password, site_name, site_url, category_id, user_id, category_name FROM accounts JOIN category ON category.id = category_id WHERE category.id = $1;', [id])
     .then((result) => {
       return result.rows[0];
     })
@@ -50,9 +50,9 @@ const editAccount = () => {
 
 const deleteAccount = (id) => {
   return db
-    .query('DELETE FROM accounts WHERE account.id = $1', [id])
+    .query('DELETE FROM accounts WHERE accounts.id = $1', [id])
     .then((result) => {
-      return result.rows[0];
+      console.log(result.rowCount);
     })
     .catch((err) => {
       console.log(err.message);
@@ -60,13 +60,13 @@ const deleteAccount = (id) => {
 };
 
 const loginAccount = (email, user_password) => {
- console.log("email and password", email, user_password)
-    return db
+  console.log("email and password", email, user_password);
+  return db
     .query('SELECT * FROM users WHERE email = $1 AND user_password = $2', [email, user_password])
     .then((result) => {
-        if(!result.rows[0]){
-           return Promise.reject (new Error("no user found"))
-        }
+      if (!result.rows[0]) {
+        return Promise.reject(new Error("no user found"));
+      }
       return result.rows[0];
     })
     .catch((err) => {

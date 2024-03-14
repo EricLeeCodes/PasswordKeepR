@@ -123,13 +123,13 @@ router.post("/login", (req, res) => {
       if (!loggedIn) {
         return res.status(400).send("Username and password are required.");
       }
-console.log("user", user)
+      console.log("user", user);
       req.session.user_id = user.id;
       res.redirect("/");
     })
     .catch((e) => {
-       console.log("e",e)
-        res.send(`error: ${e}`)
+      console.log("e", e);
+      res.send(`error: ${e}`);
     });
 
 });
@@ -153,9 +153,8 @@ router.post("/edit", (req, res) => {
 });
 
 // Delete account 
-router.delete("/:id/delete", (req, res) => {
+router.post("/:id/delete", (req, res) => {
   const accountId = req.params.id;
-
   deleteAccount(accountId)
     .then(() => {
       res.send('Account deleted successfully');
