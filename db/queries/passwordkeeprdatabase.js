@@ -23,6 +23,18 @@ const getAccountsByCategory = (id) => {
     });
 };
 
+const getIndividualAccount = (id) => {
+  return db
+  .query('SELECT * FROM accounts WHERE id = $1', [id])
+  .then((result) => {
+    return result.rows[0];
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+}
+
+
 const addAccount = (account) => {
   return db
     .query('INSERT INTO accounts (email, password, site_name, site_url, category_id, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *', [account.email, account.password, account.site_name, account.site_url, account.category_id, account.user_id])
@@ -35,11 +47,12 @@ const addAccount = (account) => {
 };
 
 
-const editAccount = () => {
+const editAccount = (email, password, id) => {
   return db
-    .query('UPDATE accounts SET email = $1, password = $2, user_id = $3', [account.email, account.password, account.user_id])
+    .query('UPDATE accounts SET email = $1, password = $2 WHERE id = $3', [email, password, id])
     .then((result) => {
-      return result.rows[0];
+      console.log(results);
+      console.log(result.rowCount);
     })
     .catch((err) => {
       console.log(err.message);
@@ -74,4 +87,4 @@ const loginAccount = (email, user_password) => {
     });
 };
 
-module.exports = { getAllAccounts, getAccountsByCategory, addAccount, editAccount, deleteAccount, loginAccount };
+module.exports = { getAllAccounts, getAccountsByCategory, addAccount, editAccount, deleteAccount, loginAccount, getIndividualAccount };

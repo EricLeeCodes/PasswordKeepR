@@ -39,11 +39,8 @@
             <div class="col-lg-6">
                 <div class="content-container">
                     <h1 class="text-center mb-4">Edit Account</h1>
-                    <form action="/update" method="POST" class="form-container">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
-                        </div>
+                    <form action="/<%= account.id %>/edit" method="POST" class="form-container">
+                       
                         <div class="mb-3">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">

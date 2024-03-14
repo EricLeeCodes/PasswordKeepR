@@ -59,7 +59,11 @@
             <% } else if (account.category_id === 5) { %>
             <td>Education</td>
             <% } %>
-            <td></td>
+            <td>
+              <form method="GET" action="/<%= account.id %>/edit">
+                <button type="submit" class="btn btn-primary">Edit</button>
+              </form>
+            </td>
             <td>
               <form method="POST" action="/<%= account.id %>/delete">
                 <button type="submit" class="btn btn-outline-danger">

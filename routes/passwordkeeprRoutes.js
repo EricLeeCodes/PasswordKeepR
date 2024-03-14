@@ -11,7 +11,7 @@ router.use(cookieSession({
 
 
 
-const { getAllAccounts, addAccount, getAccountsByCategory, editAccount, deleteAccount, loginAccount } = require('../db/queries/passwordkeeprdatabase.js');
+const { getAllAccounts, addAccount, getAccountsByCategory, editAccount, deleteAccount, loginAccount, getIndividualAccount } = require('../db/queries/passwordkeeprdatabase.js');
 
 /////////////////////////////////////////////////////////
 ////////////////////////GET//////////////////////////////
@@ -75,21 +75,24 @@ router.get('/:id', (req, res) => {
 // Edit account 
 router.get('/:id/edit', (req, res) => {
 
+
   const userId = req.session.user_id;
   if (!userId) {
     return res.redirect('/login');
   }
 
-  const postId = req.params.id;
+  const accountId = req.params.id;
 
-  editAccount(postId)
-    .then((post) => {
-      res.render('edit', { post });
+  getIndividualAccount(accountId)
+    .then((account) => {
+      const templateVars = {
+        account
+      };
+      res.status(200).render('edit', templateVars);
     })
-    .catch((error) => {
-      console.error('Error fetching post:', error);
-      res.status(500).send('Internal Server Error');
-    });
+
+  
+
 });
 
 /////////////////////////////////////////////////////////
@@ -136,20 +139,24 @@ router.post("/login", (req, res) => {
 
 
 //Update account 
+router.post("/:id/edit", (req, res) => {
 
-router.post("/edit", (req, res) => {
   let accountEmail = req.body.email;
   let accountPassword = req.body.password;
-  let accountUserId = req.session.user_id;
 
-  const account = (accountEmail, accountPassword, accountUserId);
+  const postId = req.params.id;
 
-  addAccount(account)
-    .then(() => {
-      res.send('Success! Return to home <a href="/">here</a>');
+  console.log(`email ${accountEmail} password ${accountPassword} id ${postId}`);
 
+  editAccount(accountEmail, accountPassword, postId)
+    .then((results) => {
+      console.log(results);
+      res.send('Edited successfully! Return home <a href="/">here</a>')
     })
-    .catch((e) => res.send(e));
+    .catch((error) => {
+      console.error('Error fetching post:', error);s
+      res.status(500).send('Internal Server Error');
+    });
 });
 
 // Delete account 
