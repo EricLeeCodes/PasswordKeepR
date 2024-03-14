@@ -2,7 +2,7 @@ const db = require('../connection');
 
 const getAllAccounts = () => {
   return db
-    .query('SELECT accounts.id, email, password, site_name, site_url, category_id, user_id, category_name FROM accounts JOIN category ON category.id = category_id;')
+    .query('SELECT accounts.id, email, password, site_name, site_url, category_id, user_id, category_name FROM accounts JOIN category ON category.id = category_id ORDER BY accounts.id DESC;')
     .then((result) => {
       return result.rows;
     })
@@ -25,19 +25,19 @@ const getAccountsByCategory = (id) => {
 
 const getIndividualAccount = (id) => {
   return db
-  .query('SELECT * FROM accounts WHERE id = $1', [id])
-  .then((result) => {
-    return result.rows[0];
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
-}
+    .query('SELECT * FROM accounts WHERE id = $1', [id])
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
 
 
-const addAccount = (account) => {
+const addAccount = (email, password, site_name, site_url, category_id, user_id) => {
   return db
-    .query('INSERT INTO accounts (email, password, site_name, site_url, category_id, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *', [account.email, account.password, account.site_name, account.site_url, account.category_id, account.user_id])
+    .query('INSERT INTO accounts (email, password, site_name, site_url, category_id, user_id) VALUES($1, $2, $3, $4, $5, $6)', [email, password, site_name, site_url, category_id, user_id])
     .then((result) => {
       return result.rows[0];
     })

@@ -9,7 +9,7 @@ router.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
-
+const { generateRandomPassword } = require('helpers.js');
 
 const { getAllAccounts, addAccount, getAccountsByCategory, editAccount, deleteAccount, loginAccount, getIndividualAccount } = require('../db/queries/passwordkeeprdatabase.js');
 
@@ -45,12 +45,10 @@ router.get('/', (req, res) => {
   if (!req.session.user_id) {
     return res.redirect("/login");
   }
-
-
 });
 
 //Category page
-router.get('/:id', (req, res) => {
+router.get('/:id/category', (req, res) => {
   const userId = req.session.user_id;
   if (!userId) {
     return res.redirect('/login');
@@ -75,7 +73,6 @@ router.get('/:id', (req, res) => {
 // Edit account 
 router.get('/:id/edit', (req, res) => {
 
-
   const userId = req.session.user_id;
   if (!userId) {
     return res.redirect('/login');
@@ -90,9 +87,17 @@ router.get('/:id/edit', (req, res) => {
       };
       res.status(200).render('edit', templateVars);
     });
+});
 
 
+// Create
+router.get('/create', (req, res) => {
+  const userId = req.session.user_id;
+  if (!userId) {
+    return res.redirect('/login');
+  }
 
+  res.status(200).render('create');
 });
 
 /////////////////////////////////////////////////////////
@@ -108,11 +113,11 @@ router.post("/create", (req, res) => {
   let accountCategory = req.body.category;
   let accountUserId = req.session.user_id;
 
-  const account = (accountEmail, accountPassword, accountSiteName, accountSiteUrl, accountCategory, accountUserId);
 
-  addAccount(account)
+
+  addAccount(accountEmail, accountPassword, accountSiteName, accountSiteUrl, accountCategory, accountUserId)
     .then(() => {
-      res.send('Success! Return to home <a href="/">here</a>');
+      res.redirect("/");
     })
     .catch((e) => res.send(e));
 });
@@ -146,10 +151,8 @@ router.post("/:id/edit", (req, res) => {
 
   const postId = req.params.id;
 
-  console.log(`email ${accountEmail} password ${accountPassword} id ${postId}`);
-
   editAccount(accountEmail, accountPassword, postId)
-    .then((results) => {
+    .then(() => {
       res.redirect("/");
     })
     .catch((error) => {
