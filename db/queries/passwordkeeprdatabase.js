@@ -60,9 +60,13 @@ const deleteAccount = (id) => {
 };
 
 const loginAccount = (email, user_password) => {
-  return db
+ console.log("email and password", email, user_password)
+    return db
     .query('SELECT * FROM users WHERE email = $1 AND user_password = $2', [email, user_password])
     .then((result) => {
+        if(!result.rows[0]){
+           return Promise.reject (new Error("no user found"))
+        }
       return result.rows[0];
     })
     .catch((err) => {

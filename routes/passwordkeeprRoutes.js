@@ -123,11 +123,15 @@ router.post("/login", (req, res) => {
       if (!loggedIn) {
         return res.status(400).send("Username and password are required.");
       }
-
+console.log("user", user)
       req.session.user_id = user.id;
       res.redirect("/");
     })
-    .catch((e) => res.send(e));
+    .catch((e) => {
+       console.log("e",e)
+        res.send(`error: ${e}`)
+    });
+
 });
 
 
