@@ -29,15 +29,26 @@
                   placeholder="Enter your email"
                 />
               </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                />
+              <div class="justify-content-center m-3">
+                <div class="mb-3">
+                  <label for="password" class="form-label">New Password:</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Enter new password"
+                  />
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button
+                    type="button"
+                    id="passGenerator"
+                    class="btn btn-secondary"
+                  >
+                    Random Password
+                  </button>
+                </div>
               </div>
               <div class="mb-3">
                 <label for="site_name" class="form-label">Site Name:</label>
@@ -79,4 +90,30 @@
       </div>
     </div>
   </body>
+  <script type="text/javascript">
+    function generateRandomPassword() {
+      //Sets an string of the alphabet in both upper and lower cases.
+      const passwordChars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%&_;(){}[]";
+      let randomString = "";
+
+      //Sets a random string by using math.random and the overall length of the string to choose from.
+      while (randomString.length < 15) {
+        randomString += passwordChars.charAt(
+          Math.floor(Math.random() * passwordChars.length)
+        );
+      }
+
+      return randomString;
+    }
+    //Connects the button and inputs the generated value into the field
+
+    document
+      .getElementById("passGenerator")
+      .addEventListener("click", function () {
+        const text = document.getElementById("password");
+        const generatedValue = generateRandomPassword();
+        text.value = generatedValue;
+      });
+  </script>
 </html>
