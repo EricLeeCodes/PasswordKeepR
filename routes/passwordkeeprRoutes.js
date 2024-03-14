@@ -9,7 +9,7 @@ router.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
 
-const { generateRandomPassword } = require('helpers.js');
+//const { generateRandomPassword } = require('helpers.js');
 
 const { getAllAccounts, addAccount, getAccountsByCategory, editAccount, deleteAccount, loginAccount, getIndividualAccount } = require('../db/queries/passwordkeeprdatabase.js');
 

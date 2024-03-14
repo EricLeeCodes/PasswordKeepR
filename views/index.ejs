@@ -10,7 +10,9 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-
+    <script src="/scripts/copyToClipboard.js">
+        
+    </script>
     <!-- App CSS  -->
     <link rel="stylesheet" href="css/index.css" type="text/css" />
   </head>
@@ -85,7 +87,11 @@
             <td><%= account.site_name %></td>
             <td><%= account.site_url %></td>
             <td><%= account.email %></td>
-            <td><%= account.password %></td>
+            <td>
+                <button onclick="copyToClipboard('<%= account.password %>')" class="btn btn-primary btn-sm">Copy </button>
+          
+
+            </td>
 
             <% if (account.category_id === 1) { %>
             <td>Finance</td>
