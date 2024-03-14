@@ -25,41 +25,29 @@
       </div>
       <div>
         <div class="d-flex justify-content-center mb-3">
-          <button
-            type="button"
-            class="btn btn-primary me-2"
-            onclick="filterCategory(1)"
-          >
-            Finance
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary me-2"
-            onclick="filterCategory(2)"
-          >
-            Social
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary me-2"
-            onclick="filterCategory(3)"
-          >
-            Work
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary me-2"
-            onclick="filterCategory(4)"
-          >
-            Entertainment
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            onclick="filterCategory(5)"
-          >
-            Education
-          </button>
+          <form method="GET" action="/1/Category">
+            <button type="submit" class="btn btn-primary me-2">Finance</button>
+          </form>
+
+          <form method="GET" action="/2/Category">
+            <button type="submit" class="btn btn-primary me-2">Social</button>
+          </form>
+
+          <form method="GET" action="/3/Category">
+            <button type="submit" class="btn btn-primary me-2">Work</button>
+          </form>
+
+          <form method="GET" action="/4/Category">
+            <button type="submit" class="btn btn-primary me-2">
+              Entertainment
+            </button>
+          </form>
+
+          <form method="GET" action="/5/Category">
+            <button type="submit" class="btn btn-primary me-2">
+              Education
+            </button>
+          </form>
         </div>
       </div>
     </div>

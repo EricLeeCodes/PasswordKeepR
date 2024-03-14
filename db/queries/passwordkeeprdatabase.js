@@ -16,7 +16,8 @@ const getAccountsByCategory = (id) => {
   return db
     .query('SELECT accounts.id, email, password, site_name, site_url, category_id, user_id, category_name FROM accounts JOIN category ON category.id = category_id WHERE category.id = $1;', [id])
     .then((result) => {
-      return result.rows[0];
+      console.log(result.rows);
+      return result.rows;
     })
     .catch((err) => {
       console.log(err.message);

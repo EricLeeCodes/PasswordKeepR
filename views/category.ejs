@@ -15,3 +15,113 @@
     <h1>Hello World</h1>
   </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Accounts</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- App CSS  -->
+    <link rel="stylesheet" href="css/index.css" type="text/css" />
+  </head>
+
+  <body>
+    <h1 class="d-flex justify-content-center">All Accounts</h1>
+    <div class="container d-flex justify-content-between">
+      <div>
+        <form method="GET" action="/create">
+          <button type="submit" class="btn btn-success">Create</button>
+        </form>
+      </div>
+      <div>
+        <div class="d-flex justify-content-center mb-3">
+          <form method="GET" action="/1/Category">
+            <button type="submit" class="btn btn-primary me-2">Finance</button>
+          </form>
+
+          <form method="GET" action="/2/Category">
+            <button type="submit" class="btn btn-primary me-2">Social</button>
+          </form>
+
+          <form method="GET" action="/3/Category">
+            <button type="submit" class="btn btn-primary me-2">Work</button>
+          </form>
+
+          <form method="GET" action="/4/Category">
+            <button type="submit" class="btn btn-primary me-2">
+              Entertainment
+            </button>
+          </form>
+
+          <form method="GET" action="/5/Category">
+            <button type="submit" class="btn btn-primary me-2">
+              Education
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container scrolling table-responsive">
+      <table
+        class="table table-dark table-striped table-hover table-bordered text-center table-sizing table align-middle"
+      >
+        <thead class="">
+          <tr>
+            <th scope="col" class="col-2">Site</th>
+            <th scope="col" class="col-3">URL</th>
+            <th scope="col" class="col-2">Email</th>
+            <th scope="col" class="col-2">Password</th>
+            <th scope="col">Category</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody class="vh-100">
+          <% for(const account of accounts) { %>
+
+          <tr>
+            <td><%= account.site_name %></td>
+            <td><%= account.site_url %></td>
+            <td><%= account.email %></td>
+            <td><%= account.password %></td>
+
+            <% if (account.category_id === 1) { %>
+            <td>Finance</td>
+            <% } else if (account.category_id === 2) { %>
+            <td>Social</td>
+            <% } else if (account.category_id === 3) { %>
+            <td>Work</td>
+            <% } else if (account.category_id === 4) { %>
+            <td>Entertainment</td>
+            <% } else if (account.category_id === 5) { %>
+            <td>Education</td>
+            <% } %>
+            <td>
+              <form method="GET" action="/<%= account.id %>/edit">
+                <button type="submit" class="btn btn-primary">Edit</button>
+              </form>
+            </td>
+            <td>
+              <form method="POST" action="/<%= account.id %>/delete">
+                <button type="submit" class="btn btn-outline-danger">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+  <script src="scripts/copyToClipboard.js"></script>
+</html>
