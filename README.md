@@ -30,14 +30,14 @@ Ditch the password management headaches and join the PasswordKeepR revolution! W
 
 PasswordKeepR is full-stack application that uses PostgreSQL relational database system and Express to manage the backend. Front-end has been build using bootstrap framework along with EJS, CSS and Javascript.
 
-# Add screenshots here ⬇️
+# Screenshots
 
 <div align="center">
 <img  style="display: block; 
            margin-left: auto;
            margin-right: auto;
            width: 70%"  
-      src="../docs/PasswordKeepR.PNG" 
+      src="./docs/PasswordKeepR.PNG" 
       alt="Tweet with 'Hello, World' written in the textarea">
 </img>
 </div>
@@ -47,7 +47,7 @@ PasswordKeepR is full-stack application that uses PostgreSQL relational database
            margin-left: auto;
            margin-right: auto;
            width: 70%"  
-      src="../docs/Logopasswordkeepr.PNG" 
+      src="./docs/Logopasswordkeepr.PNG" 
       alt="Tweet with 'Hello, World' written in the textarea">
 </img>
 </div>
@@ -57,7 +57,7 @@ PasswordKeepR is full-stack application that uses PostgreSQL relational database
            margin-left: auto;
            margin-right: auto;
            width: 70%"  
-      src="../docs/LoginPasswordKeepr.PNG" 
+      src="./docs/LoginPasswordKeepr.PNG" 
       alt="Tweet with 'Hello, World' written in the textarea">
 </img>
 </div>
@@ -67,7 +67,7 @@ PasswordKeepR is full-stack application that uses PostgreSQL relational database
            margin-left: auto;
            margin-right: auto;
            width: 70%"  
-      src="../docs/HomescreenPasswordKeepr.PNG" 
+      src="./docs/HomescreenPasswordKeepr.PNG" 
       alt="Tweet with 'Hello, World' written in the textarea">
 </img>
 </div>
@@ -77,7 +77,7 @@ PasswordKeepR is full-stack application that uses PostgreSQL relational database
            margin-left: auto;
            margin-right: auto;
            width: 70%"  
-      src="../docs/EditPasswordKeepr.PNG" 
+      src="./docs/EditPasswordKeepr.PNG" 
       alt="Tweet with 'Hello, World' written in the textarea">
 </img>
 </div>
@@ -87,7 +87,7 @@ PasswordKeepR is full-stack application that uses PostgreSQL relational database
            margin-left: auto;
            margin-right: auto;
            width: 70%"  
-      src="../docs/CreatePasswordkeepr.PNG" 
+      src="./docs/CreatePasswordkeepr.PNG" 
       alt="Tweet with 'Hello, World' written in the textarea">
 </img>
 </div>
