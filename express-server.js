@@ -9,9 +9,9 @@ const path = require('path');
 const app = express();
 const PORT = 8000;
 
-
+app.set('views', './views');
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+
 
 // Middleware
 
