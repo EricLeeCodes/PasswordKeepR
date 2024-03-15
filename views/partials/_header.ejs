@@ -1,0 +1,33 @@
+<nav class="navbar bg-blue">
+  <div
+    class="d-flex container-fluid justify-content-around align-items-center gap-5"
+  >
+    <div>
+      <a class="navbar-brand d-flex align-items-center fs-5 fw-medium" href="#"
+        ><img
+          src="img/Passwordkeepr-removebg-preview.png"
+          alt="Password Keeper Logo"
+          class="image-resize"
+        />
+        <p>PasswordKeepR</p></a
+      >
+    </div>
+    <div>
+      <ul class="navbar-nav">
+        <li class="nav-item"></li>
+        <li class="nav-item">
+          <form action="/logout" method="POST">
+            <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <style>
+    .image-resize {
+      height: 100px;
+      width: 100px;
+    }
+  </style>
+</nav>
