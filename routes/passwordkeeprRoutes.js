@@ -74,7 +74,6 @@ router.get('/:id/category', (req, res) => {
 
 // Edit account 
 router.get('/:id/edit', (req, res) => {
-
   const userId = req.session.user_id;
   if (!userId) {
     return res.redirect('/login');
@@ -127,6 +126,7 @@ router.post("/create", (req, res) => {
 //Login account button
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
+
 
   const loggedIn = loginAccount(email, password)
     .then((user) => {
