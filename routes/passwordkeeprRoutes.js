@@ -175,6 +175,14 @@ router.post("/:id/delete", (req, res) => {
     });
 });
 
+//Logs out user
+router.post("/logout", (req, res) => {
+  //Discards session by setting it to null
+  req.session = null;
+  //Redirects to the log in page.
+  res.redirect(`/login`);
+});
+
 
 module.exports = router;
 
