@@ -10,6 +10,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+
     <style>
       table {
         table-layout: fixed;
@@ -28,6 +29,7 @@
       .scrolling {
         height: 400px;
         overflow: scroll;
+        overflow-x: hidden;
       }
     </style>
     <script src="/scripts/copyToClipboard.js"></script>
@@ -35,6 +37,7 @@
   </head>
 
   <body>
+    <%- include('partials/_header') %>
     <h1 class="d-flex justify-content-center">Categoried Accounts</h1>
     <div class="container d-flex justify-content-between">
       <div class="d-flex">

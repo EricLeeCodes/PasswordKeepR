@@ -9,15 +9,15 @@ const path = require('path');
 const app = express();
 const PORT = 8000;
 
-app.set('views', './views');
+
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-console.log(__dirname);
 
 //Route
 
