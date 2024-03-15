@@ -32,8 +32,7 @@ router.get('/', (req, res) => {
     getAllAccounts()
       .then((accounts) => {
         const templateVars = {
-          accounts,
-          user
+          accounts
         };
         //Redirect if not logged in
 
