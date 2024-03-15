@@ -24,12 +24,16 @@ router.get('/login', (req, res) => {
 
 //The home page
 router.get('/', (req, res) => {
+
+  const userId = req.session.user_id;
+
   //Check if user is logged in
-  if (req.session.user_id) {
+  if (userId) {
     getAllAccounts()
       .then((accounts) => {
         const templateVars = {
-          accounts
+          accounts,
+          user
         };
         //Redirect if not logged in
 
@@ -41,7 +45,7 @@ router.get('/', (req, res) => {
         res.status(500).send('Internal Server Error');
       });
   }  //If user is not logged in, goes to login page
-  if (!req.session.user_id) {
+  if (!userId) {
     return res.redirect("/login");
   }
 });
