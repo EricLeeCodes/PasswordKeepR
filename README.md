@@ -21,7 +21,7 @@ Ditch the password management headaches and join the PasswordKeepR revolution! W
 
 
 ##### Tech Stack 💻
-PasswordKeepR is full-stack application that uses PostgreSQL relational database system and Express to manage the backend. Front-end has been build using bootstrap framework along with EJS, CSS, SASS and Javascript.
+PasswordKeepR is full-stack application that uses PostgreSQL relational database system and Express to manage the backend. Front-end has been build using bootstrap framework along with EJS, CSS and Javascript.
 
 # Add screenshots here ⬇️
 
