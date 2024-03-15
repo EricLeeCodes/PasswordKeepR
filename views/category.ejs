@@ -10,17 +10,39 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <style>
+      table {
+        table-layout: fixed;
+        width: auto;
+        font-size: 9px;
+      }
+
+      td {
+        word-wrap: break-word;
+      }
+
+      th {
+        position: sticky;
+        top: 0px;
+      }
+      .scrolling {
+        height: 400px;
+        overflow: scroll;
+      }
+    </style>
     <script src="/scripts/copyToClipboard.js"></script>
     <!-- App CSS  -->
-    <link rel="stylesheet" href="css/index.css" type="text/css" />
   </head>
 
   <body>
-    <h1 class="d-flex justify-content-center">All Accounts</h1>
+    <h1 class="d-flex justify-content-center">Categoried Accounts</h1>
     <div class="container d-flex justify-content-between">
-      <div>
+      <div class="d-flex">
         <form method="GET" action="/create">
-          <button type="submit" class="btn btn-success">Create</button>
+          <button type="submit" class="btn btn-success me-2">Create</button>
+        </form>
+        <form method="GET" action="/">
+          <button type="submit" class="btn btn-primary me-2">All</button>
         </form>
       </div>
       <div>
@@ -66,7 +88,7 @@
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        <tbody class="vh-100">
+        <tbody>
           <% for(const account of accounts) { %>
 
           <tr>
@@ -100,9 +122,7 @@
             </td>
             <td>
               <form method="POST" action="/<%= account.id %>/delete">
-                <button type="submit" class="btn btn-outline-danger">
-                  Delete
-                </button>
+                <button type="submit" class="btn btn-danger">Delete</button>
               </form>
             </td>
           </tr>
